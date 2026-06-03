@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import  Scanner  from "@yudiel/react-qr-scanner";
+import { Scanner } from "@yudiel/react-qr-scanner";
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxXRLi8KECMTkku8WyjIvbyO--N3tJfx_oIQU1PPN4_aqnmkTApo6jYqh03iAJ5kUSz/exec";
 
