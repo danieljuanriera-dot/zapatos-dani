@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { QrReader } from "react-qr-reader";
+import { Scanner } from "@yudiel/react-qr-scanner";
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxXRLi8KECMTkku8WyjIvbyO--N3tJfx_oIQU1PPN4_aqnmkTApo6jYqh03iAJ5kUSz/exec";
 
@@ -100,10 +100,15 @@ export default function App() {
 
       {scanning && (
         <div style={{ margin: "20px 0" }}>
-          <QrReader
-            constraints={{ facingMode: "environment" }}
-            onResult={(result) => handleScan(result)}
-          />
+         <Scanner
+  onScan={(result) => {
+    if (result.length > 0) {
+      setSearch(result[0].rawValue);
+      setScanning(false);
+    }
+  }}
+/>
+``
         </div>
       )}
 
