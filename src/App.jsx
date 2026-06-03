@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Scanner } from "@yudiel/react-qr-scanner";
+import  Scanner  from "@yudiel/react-qr-scanner";
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxXRLi8KECMTkku8WyjIvbyO--N3tJfx_oIQU1PPN4_aqnmkTApo6jYqh03iAJ5kUSz/exec";
 
@@ -99,15 +99,16 @@ export default function App() {
       </button>
 
       {scanning && (
-        <div style={{ margin: "20px 0" }}>
-         <Scanner
-  onScan={(result) => {
-    if (result.length > 0) {
-      setSearch(result[0].rawValue);
+        <div style={{ margin: "20px 0" }}>  
+<Scanner
+  onResult={(text) => {
+    if (text) {
+      setSearch(text);
       setScanning(false);
     }
   }}
 />
+
 ``
         </div>
       )}
