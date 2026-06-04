@@ -95,44 +95,43 @@ export default function App() {
   }, []);
 
   const updateEstado = async (codigo, estado) => {
-    setSavingCode(codigo);
+  setSavingCode(codigo);
 
-    try {
-      const response = await fetch(SCRIPT_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          action: "update",
-          codigo,
-          estado,
-        }),
-      });
+  try {
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        action: "update",
+        codigo,
+        estado,
+      }),
+    });
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const json = await response.json();
-
-      if (!json?.ok) {
-        throw new Error(json?.error || "No se pudo guardar");
-      }
-
-      setItems((prev) =>
-        prev.map((item) =>
-          item.codigo === codigo ? { ...item, estado } : item
-        )
-      );
-    } catch (error) {
-      console.error(error);
-      alert("No se pudo guardar el cambio en Google Sheets.");
-    } finally {
-      setSavingCode("");
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
     }
-  };
 
+    const json = await response.json();
+
+    if (!json?.ok) {
+      throw new Error(json?.error || "No se pudo guardar");
+    }
+
+    setItems((prev) =>
+      prev.map((item) =>
+        item.codigo === codigo ? { ...item, estado } : item
+      )
+    );
+  } catch (error) {
+    console.error(error);
+    alert("No se pudo guardar el cambio en Google Sheets.");
+  } finally {
+    setSavingCode("");
+  }
+};
   const buildItemAppUrl = (codigo) => {
     const origin = window.location.origin;
     const url = new URL(window.location.pathname || "/", origin);
