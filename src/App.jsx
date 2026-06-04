@@ -93,11 +93,6 @@ export default function App() {
 
     loadData();
   }, []);
-
-  const updateItemFields = async (codigo, changes) => {
-    setSavingCode(codigo);
-
-    try {
       
 const updateItemFields = async (codigo, changes) => {
   setSavingCode(codigo);
