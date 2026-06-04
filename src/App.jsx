@@ -40,8 +40,8 @@ export default function App() {
 
     if (!q) return items;
 
-    return items.filter((item) => {
-      return [
+    return items.filter((item) =>
+      [
         item.codigo,
         item.marca,
         item.tipo,
@@ -51,8 +51,8 @@ export default function App() {
         item.ubicacion,
         item.zona,
         item.estado,
-      ].some((field) => normalize(field).includes(q));
-    });
+      ].some((field) => normalize(field).includes(q))
+    );
   }, [items, search]);
 
   const loadData = async () => {
@@ -86,6 +86,7 @@ export default function App() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q");
+
     if (q) {
       setSearch(q);
     }
@@ -134,8 +135,7 @@ export default function App() {
 
   const buildItemAppUrl = (codigo) => {
     const origin = window.location.origin;
-    const basePath = window.location.pathname || "/";
-    const url = new URL(basePath, origin);
+    const url = new URL(window.location.pathname || "/", origin);
     url.searchParams.set("q", codigo);
     return url.toString();
   };
@@ -402,7 +402,9 @@ export default function App() {
                     </p>
                   </div>
 
-                  {buildQrImageUrl(item.codigo)}                    alt={`QR de ${item.codigo}`}
+                  <img
+                    src={buildQrImageUrl(item.codigo)}
+                    alt={`QR de ${item.codigo}`}
                     width={96}
                     height={96}
                     style={{
@@ -476,7 +478,11 @@ export default function App() {
                 </div>
 
                 <div style={{ marginTop: 12 }}>
-                  {buildItemAppUrl(item.codigo)}                    style={{
+                  <a
+                    href={buildItemAppUrl(item.codigo)}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
                       color: "#2563eb",
                       fontSize: 13,
                       textDecoration: "none",
